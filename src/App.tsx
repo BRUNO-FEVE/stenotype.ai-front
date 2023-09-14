@@ -1,4 +1,4 @@
-import { FileVideo, Github, Upload } from "lucide-react";
+import { Github } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { Separator } from "./components/ui/separator";
 import { Textarea } from "./components/ui/textarea";
@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Slider } from "./components/ui/slider";
 import { SliderProps } from "@radix-ui/react-slider";
 import React from "react";
+import { VideoConversorForm } from "./components/video-consversor-form";
 
 interface TemperatureSliderProps {
   defaultValue: SliderProps["defaultValue"]
@@ -37,22 +38,7 @@ export function App( { defaultValue }: TemperatureSliderProps ) {
           </p>
         </div>
         <aside className="w-80 space-y-6">
-          <form className="space-y-3">
-            <label htmlFor="video" className="aspect-video flex border border-dashed text-sm text-muted-foreground flex-col justify-center items-center hover:bg-primary/5 cursor-pointer">
-              <FileVideo className="w-4 h-4"/>
-              Selecione um video
-            </label>
-            <input type="file" id="video" accept="video/mp4" className="sr-only" />
-            <Separator />
-            <div className=" space-y-1">
-              <Label className="text-sm" htmlFor="transcription_prompt">Prompt de transcrição</Label>
-              <Textarea id="transcription_prompt" className="resize-none h-14" placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)" />
-            </div>
-            <Button className="w-full gap-4">
-              Carregar vídeo
-              <Upload className="h-4 w-4" />
-            </Button>
-          </form>
+          <VideoConversorForm />
           <Separator />
           <form className="space-y-6">
             <div className="space-y-1">
