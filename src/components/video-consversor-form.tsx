@@ -1,4 +1,4 @@
-import { FileVideo, Upload } from "lucide-react"
+import { CheckCircle, FileVideo, Upload } from "lucide-react"
 import { Button } from "./ui/button"
 import { Label } from "./ui/label"
 import { Separator } from "./ui/separator"
@@ -8,15 +8,22 @@ import { getFfmpeg } from "@/lib/ffmpeg"
 import { fetchFile } from '@ffmpeg/util'
 import { api } from "@/lib/axios"
 
-// interface ButtonStatesProps {
-//   wating: 'wating',
-//   transcripting: 'transcripting',
-//   finished: 'finished'
-// }
+const ButtonStatesProps = {
+  converting: 'Convertendo...',
+  transcripting: 'Transcrevendo...',
+  completed: 'Sucesso'
+}
+
+interface ButtonStateProps {
+  converting: string
+  transcripting: string
+  completed: string
+}
 
 export function VideoConversorForm() {
   const [ video, setVideo ] = useState<File | null>(null)
   const promptRef = useRef<HTMLTextAreaElement>(null)
+  const [ button, setButton ] = useState<keyof ButtonStateProps | null>(null)
 
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -80,6 +87,8 @@ export function VideoConversorForm() {
       return
     }
 
+    setButton('converting')
+
     const audioFile = await convertAudioToVideo(video)
 
     const data = new FormData()
@@ -89,9 +98,13 @@ export function VideoConversorForm() {
     const response = await api.post('/videos', data)
     const videoId = response.data.video.id
 
+    setButton('transcripting')
+
     await api.post(`/videos/${videoId}/transcription`, {
       prompt: prompt
     })
+
+    setButton('completed')
 
     console.log('finalizou')
   }
@@ -105,12 +118,21 @@ export function VideoConversorForm() {
           </>
         : 
           <>
-            <FileVideo className="w-4 h-4"/>
+            <FileVideo className="w-4 h-4" onChange={() => {console.log('teste')}}/>
             Selecione um video
           </>
         }
       </label>
-      <input type="file" id="video" accept="video/mp4" className="sr-only" onChange={handleFileSelected} />
+      <input 
+        type="file" 
+        id="video" 
+        accept="video/mp4" 
+        className="sr-only" 
+        onChange={(event) => {
+        handleFileSelected(event)
+        setButton(null)
+      }}
+      />
       <Separator />
       <div className=" space-y-1">
         <Label className="text-sm" htmlFor="transcription_prompt">Prompt de transcrição</Label>
@@ -119,12 +141,33 @@ export function VideoConversorForm() {
           id="transcription_prompt" 
           className="resize-none h-14" 
           placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)" 
+          disabled={button ? true : false}
         />
       </div>
-      <Button type="submit" className="w-full gap-4">
-          Carregar vídeo
-          <Upload className="h-4 w-4" />
-      </Button>
+      <div className="space-y-3">
+        <Button 
+          data-success={button === 'completed'}
+          type="submit" 
+          className={'w-full gap-4 data-[success=true]:bg-emerald-500'} 
+          disabled={button ? true : false}>
+            {button ? 
+              <>
+                {ButtonStatesProps[button]}
+                {button === 'completed' ? <CheckCircle className="h-4 w-4" /> : null}
+              </>
+            : 
+              <>
+                Carregar vídeo
+                <Upload className="h-4 w-4" />
+              </>
+            }
+        </Button>
+        {button === 'completed' ? 
+          <p className="text-xs text-muted-foreground italic">Etapa concluida, agora selecione o prompt e customize-o de acordo com as suas prefencias!</p> 
+        : 
+          null
+        }
+      </div>
     </form>
   )
 }
