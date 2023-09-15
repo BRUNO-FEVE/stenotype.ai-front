@@ -52,7 +52,12 @@ export function App() {
         <aside className="w-80 space-y-2">
           <VideoConversorForm onUploadVideo={setVideoId} />
           <Separator />
-          <VideoAiForm onValueChange={setTemplate} onResponse={setCompletion} videoId={videoId} promptInput={promptInput} />
+          <VideoAiForm 
+            onValueChange={setTemplate} 
+            onResponse={setCompletion} 
+            videoId={videoId} 
+            promptInput={promptInput} 
+          />
         </aside>
       </main>
     </div>

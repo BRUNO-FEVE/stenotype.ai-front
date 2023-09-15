@@ -34,7 +34,7 @@ export default function VideoAiForm( { onValueChange, onResponse, videoId, promp
         onValueChange(promptSelected.template)
     }
 
-    const { setInput, handleSubmit, completion } = useCompletion({
+    const { setInput, handleSubmit, isLoading, completion } = useCompletion({
         api: 'http://localhost:3333/ai/complete',
         body: {
             videoId,
@@ -108,7 +108,7 @@ export default function VideoAiForm( { onValueChange, onResponse, videoId, promp
                 Valores mais altos tendem a deixar o resultado mais criativo e com possiveis erros
               </p>
             </div>
-            <Button className="w-full" disabled={videoId ? false : true}>
+            <Button className="w-full" disabled={videoId || isLoading ? false : true}>
               Executar
             </Button>
           </form>
