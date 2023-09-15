@@ -8,6 +8,10 @@ import { getFfmpeg } from "@/lib/ffmpeg"
 import { fetchFile } from '@ffmpeg/util'
 import { api } from "@/lib/axios"
 
+interface VideoConversorFormProps {
+  onUploadVideo: (videoId: string) => void
+}
+
 const ButtonStatesProps = {
   converting: 'Convertendo...',
   transcripting: 'Transcrevendo...',
@@ -20,7 +24,7 @@ interface ButtonStateProps {
   completed: string
 }
 
-export function VideoConversorForm() {
+export function VideoConversorForm({ onUploadVideo }: VideoConversorFormProps) {
   const [ video, setVideo ] = useState<File | null>(null)
   const promptRef = useRef<HTMLTextAreaElement>(null)
   const [ button, setButton ] = useState<keyof ButtonStateProps | null>(null)
@@ -107,6 +111,8 @@ export function VideoConversorForm() {
     setButton('completed')
 
     console.log('finalizou')
+
+    onUploadVideo(videoId)
   }
 
   return (

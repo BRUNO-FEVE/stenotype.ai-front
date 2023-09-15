@@ -1,15 +1,17 @@
-import { SliderProps } from '@radix-ui/react-slider'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Slider } from './ui/slider'
 import { useEffect, useState } from 'react'
 import { api } from '@/lib/axios'
+import { useCompletion } from 'ai/react'
 
 
 interface TemperatureSliderProps {
-    defaultValue: SliderProps["defaultValue"]
     onValueChange: (template: string) => void
+    onResponse: (completion: string) => void
+    videoId: string | null
+    promptInput: string | null
 }
 
 interface PromptProps {
@@ -18,8 +20,8 @@ interface PromptProps {
     template: string
 }
 
-export default function VideoAiForm( { defaultValue, onValueChange }: TemperatureSliderProps ) {
-    const [ sliderValue, setSliderValue ] = useState(defaultValue)
+export default function VideoAiForm( { onValueChange, onResponse, videoId, promptInput }: TemperatureSliderProps ) {
+    const [ temperature, setTemperature ] = useState(0.5)
     const [ prompts, setPrompts] = useState<PromptProps[] | null >(null)
 
     function handleSelectChange(promptId: string) {
@@ -32,14 +34,32 @@ export default function VideoAiForm( { defaultValue, onValueChange }: Temperatur
         onValueChange(promptSelected.template)
     }
 
+    const { setInput, handleSubmit, completion } = useCompletion({
+        api: 'http://localhost:3333/ai/complete',
+        body: {
+            videoId,
+            temperature,
+        },
+        headers: {
+            "Content-type": "application/json",
+        }
+    })
+
     useEffect(() => {
         api.get('/prompts').then(response => 
             setPrompts(response.data)
         )
     }, [])
 
+    useEffect(() => {
+        if (promptInput) { 
+            setInput(promptInput)
+        }
+        onResponse(completion)
+    }, [promptInput, completion])
+
     return (
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-1">
             <Label htmlFor="" className="text-sm">Prompt</Label>
                 <Select onValueChange={handleSelectChange}>
@@ -74,21 +94,21 @@ export default function VideoAiForm( { defaultValue, onValueChange }: Temperatur
             </div>
             <div className="flex flex-row justify-between items-center">
                 <Label htmlFor="temperature">Temperatura</Label>
-                <span className=" text-sm text-muted-foreground">{sliderValue}</span>
+                <span className=" text-sm text-muted-foreground">{temperature}</span>
             </div>
             <div className="space-y-3"> 
               <Slider 
                 id="temperature"
                 max={1}
-                onValueChange={setSliderValue}
-                defaultValue={[0.5]}
+                onValueChange={event => setTemperature(event[0])}
+                defaultValue={[temperature]}
                 step={0.1}
               />
               <p className="text-xs text-muted-foreground italic">
                 Valores mais altos tendem a deixar o resultado mais criativo e com possiveis erros
               </p>
             </div>
-            <Button className="w-full">
+            <Button className="w-full" disabled={videoId ? false : true}>
               Executar
             </Button>
           </form>
