@@ -99,14 +99,14 @@ export function VideoConversorForm({ onUploadVideo }: VideoConversorFormProps) {
 
     data.append('file', audioFile)
 
-    const response = await api.post('/videos', data)
-    const videoId = response.data.video.id
-
     setButton('transcripting')
 
-    await api.post(`/videos/${videoId}/transcription`, {
-      prompt: prompt
-    })
+    const response = await api.post(`/videos/${prompt}`, data)
+    const videoId = response.data.video.id
+
+    // await api.post(`/videos/${videoId}/transcription`, {
+    //   prompt: prompt
+    // })
 
     setButton('completed')
 
