@@ -35,7 +35,8 @@ export default function VideoAiForm( { onValueChange, onResponse, videoId, promp
     }
 
     const { setInput, handleSubmit, isLoading, completion } = useCompletion({
-        api: 'http://localhost:3333/ai/complete',
+        api: 'https://upload-ai-back.vercel.app/ai/complete',
+        // api: 'http://localhost:3333/ai/complete',
         body: {
             videoId,
             temperature,
@@ -108,8 +109,8 @@ export default function VideoAiForm( { onValueChange, onResponse, videoId, promp
                 Valores mais altos tendem a deixar o resultado mais criativo e com possiveis erros
               </p>
             </div>
-            <Button className="w-full" disabled={videoId || isLoading ? false : true}>
-              Executar
+            <Button className="w-full" disabled={videoId || isLoading == true ? false : true}>
+              {isLoading ? "Carregando..." : "Executar"}
             </Button>
           </form>
   )

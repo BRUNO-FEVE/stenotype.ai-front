@@ -104,10 +104,6 @@ export function VideoConversorForm({ onUploadVideo }: VideoConversorFormProps) {
     const response = await api.post(`/videos/${prompt}`, data)
     const videoId = response.data.video.id
 
-    // await api.post(`/videos/${videoId}/transcription`, {
-    //   prompt: prompt
-    // })
-
     setButton('completed')
 
     console.log('finalizou')
