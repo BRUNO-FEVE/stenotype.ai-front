@@ -35,8 +35,8 @@ export default function VideoAiForm( { onValueChange, onResponse, videoId, promp
     }
 
     const { setInput, handleSubmit, isLoading, completion } = useCompletion({
-        // api: 'https://upload-ai-back.vercel.app/ai/complete', // --> PROD
-        api: 'http://localhost:3333/ai/complete', // --> DEV
+        api: 'https://upload-ai-back.vercel.app/ai/complete', // --> PROD
+        // api: 'http://localhost:3333/ai/complete', // --> DEV
         body: {
             videoId,
             temperature,
