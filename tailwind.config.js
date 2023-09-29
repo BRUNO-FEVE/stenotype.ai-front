@@ -20,6 +20,7 @@ module.exports = {
       backgroundColor: {
         skin: {
           fill: 'var(--color-background)',
+          'bg-base-foreground': 'var(--color-text-base)',
           'bg-fill-default': 'var(--color-fill)',
           'button-accent': 'var(--color-button-accent)',
           'button-accent-hover': 'var(--color-button-accent-hover)',
