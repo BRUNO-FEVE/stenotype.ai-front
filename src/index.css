@@ -9,22 +9,24 @@ body {
 @layer base {
     :root { 
         --color-background: #000000;
+        --color-secondary: #212529;
         --color-text-base: #ffffff;
         --color-text-muted: #beadb6;
         --color-text-inverted: #9292df;
         --color-fill: #2D2DC8;
-        --color-button-accent: #ffffff;
-        --color-button-accent-hover: #242440;
+        --color-button-accent: #6969DD;
+        --color-button-accent-hover: #5656bc;
         --color-button-muted: #6969DD;
     }
     .theme-white {
         --color-background: #ffffff;
+        --color-secondary: #edf2f4;
         --color-text-base: #000000;
         --color-text-muted: #442d39;
         --color-text-inverted: #2D2DC8;
         --color-fill: #2D2DC8;
-        --color-button-accent: #ffffff;
-        --color-button-accent-hover: #EEEEFB;
-        --color-button-muted: #6969DD;
+        --color-button-accent: #6969DD;
+        --color-button-accent-hover: #6767d1;
+        --color-button-muted: #9d9dec;
     }
 }
