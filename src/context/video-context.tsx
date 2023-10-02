@@ -1,29 +1,47 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PropsWithChildren, createContext, useState } from "react"
 
+interface videoProps {
+    id: string
+    name: string
+    path: string
+    transcription: string
+    createAt: string
+}
+
 interface DefaultVideoProps {
-    videoId: string | null
-    setVideoId: (videoId: string) => void
+    video: videoProps | null
+    prompt: string | null
+    setVideo: (video: videoProps) => void
+    setPrompt: (prompt: string) => void
 }
 
 const DefaultVideo: DefaultVideoProps = {
-    videoId: null,
+    video: null,
+    prompt: null,
 
-    setVideoId: (_videoId: string) => {
+    setPrompt: (_prompt: string) => {
         return
     },
+
+    setVideo: (_video: videoProps) => {
+        return
+    }
 }
 
 export const VideoContext = createContext(DefaultVideo)
 
 export default function VideoProvider( {children}: PropsWithChildren ) {
-    const [ videoId, setVideoId ] = useState<string | null>('')
+    const [ video, setVideo ] = useState<videoProps | null>(null)
+    const [ prompt, setPrompt ] = useState<string | null>(null)
 
     return (
         <VideoContext.Provider
         value={{
-            videoId,
-            setVideoId
+            video,
+            prompt,
+            setVideo,
+            setPrompt
         }}
         >
             {children}
