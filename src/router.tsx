@@ -13,7 +13,7 @@ export default function AppRouter() {
       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='conversor' element={width > 1000 ? null : <VideoConversorMobile />} />
-          <Route path='conversor/transcription' element={<TranscriptionMobile />} />
+          <Route path='transcription' element={<TranscriptionMobile />} />
           <Route path='prompt' element={<Prompt />} />
       </Routes>
     :
