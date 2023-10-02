@@ -1,12 +1,12 @@
 import Navbar from "@/components/navbar"
+import NewPageButton from "@/components/ui/new-page-button"
 import { ThemeContext } from "@/context/theme-context"
 import { VideoContext } from "@/context/video-context"
 import { api } from "@/lib/axios"
 import { getFfmpeg } from "@/lib/ffmpeg"
 import { fetchFile } from "@ffmpeg/util"
-import { CheckCircle, FileVideo, Upload, ArrowRightIcon } from "lucide-react"
+import { CheckCircle, FileVideo, Upload } from "lucide-react"
 import { ChangeEvent, FormEvent, useContext, useMemo, useRef, useState } from "react"
-import { Link } from "react-router-dom"
 
 const ButtonStatesProps = {
   converting: 'Convertendo...',
@@ -22,11 +22,11 @@ interface ButtonStateProps {
 
 export default function VideoConversorMobile() {
   const promptRef = useRef<HTMLTextAreaElement>(null)
-  const [ video, setVideo ] = useState<File | null>(null)
-  const [ button, setButton ] = useState<keyof ButtonStateProps | null>('completed')
+  const [ videofile, setVideoFile ] = useState<File | null>(null)
+  const [ button, setButton ] = useState<keyof ButtonStateProps | null>(null)
 
   const { theme } = useContext(ThemeContext)
-  const { setVideoId } = useContext(VideoContext)
+  const { setVideo, setPrompt } = useContext(VideoContext)
   
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -37,16 +37,16 @@ export default function VideoConversorMobile() {
     }
     const videoFile =  files[0]
 
-    setVideo(videoFile)
+    setVideoFile(videoFile)
   }
 
   const previewURL  = useMemo(() => {
-    if (!video) {
+    if (!videofile) {
       return null
     }
 
-    return URL.createObjectURL(video)
-  }, [video])
+    return URL.createObjectURL(videofile)
+  }, [videofile])
 
   
 
@@ -86,15 +86,19 @@ export default function VideoConversorMobile() {
   async function handleSubimit (event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const prompt= promptRef.current?.value
+    const prompt = promptRef.current?.value
+    
+    if (prompt) {
+      setPrompt(prompt)
+    }
 
-    if (!video) {
+    if (!videofile) {
       return
     }
 
     setButton('converting')
 
-    const audioFile = await convertAudioToVideo(video)
+    const audioFile = await convertAudioToVideo(videofile)
 
     const data = new FormData()
 
@@ -103,20 +107,27 @@ export default function VideoConversorMobile() {
     setButton('transcripting')
 
     const response = await api.post(`/videos/${prompt}`, data)
-    const videoId = response.data.video.id
+    console.log(response)
+    const video = {
+      id: response.data.video.id,
+      name: response.data.video.name,
+      path: response.data.video.path,
+      transcription: response.data.video.transcription,
+      createAt: response.data.video.createAt
+    }
 
     setButton('completed')
 
     console.log('finalizou')
 
-    setVideoId(videoId)
+    setVideo(video)
   }
 
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
       <Navbar />
       <form onSubmit={handleSubimit} className=" flex flex-col px-20 flex-1 justify-center gap-6">
-        <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${video ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
+        <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
           {previewURL ? 
             <>
               <div className="relative"> 
@@ -171,11 +182,7 @@ export default function VideoConversorMobile() {
         {button === 'completed' ? 
           <>
             <p className="text-md text-skin-base italic">Etapa concluida, agora vá para a proxima etapa e veja a transcrição do seu video.</p> 
-            <Link to={"transcription"}>
-              <button className="bg-skin-bg-base-foreground h-14 w-14 rounded-full fixed right-5 bottom-5 flex justify-center items-center">
-                <ArrowRightIcon className="text-skin-inverted w-8 h-8" />
-              </button>
-            </Link>
+            <NewPageButton to="/transcription" />
           </>
         : 
           null

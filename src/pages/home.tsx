@@ -17,7 +17,7 @@ export default function Home() {
           <h1 className="text-bold text-5xl text-center md:text-6xl lg:text-left lg:text-7xl text-skin-base z-10 leading-10">ELEVATE YOUR PRODUCTIVITY <br/> WITH AI</h1>
           <p className="text-skin-muted z-10 px-16 lg:px-0 lg:pr-28 lg:text-left text-center">Harness the full potential of Stenotype.ai to craft engaging social media content or even streamline a complex lecture.</p>
           <Link 
-            to={'conversor'}
+            to={'/conversor'}
             className="text-white text-xl z-10 px-4 py-2 rounded-md hover:bg-skin-button-accent-hover bg-skin-button-accent">
               <button>Get Started for free</button>
           </Link>
