@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar"
-import NewPageButton from "@/components/ui/new-page-button"
+import NewPageButton from "@/components/ui/button"
 import { ThemeContext } from "@/context/theme-context"
 import { VideoContext } from "@/context/video-context"
 import { api } from "@/lib/axios"

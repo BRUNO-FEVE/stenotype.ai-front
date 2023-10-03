@@ -1,7 +1,7 @@
 // import { useContext } from "react";
 
 import Navbar from "@/components/navbar";
-import { TextSelect } from 'lucide-react'
+import { TextSelect, ThermometerSun, ThermometerSnowflake } from 'lucide-react'
 import { ThemeContext } from "@/context/theme-context";
 import { VideoContext } from "@/context/video-context";
 import { useContext, useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { NewSelect } from "@/components/ui/select";
 import { SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
 import { api } from "@/lib/axios";
 import Slider from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 
 interface PromptProps {
   id: string
@@ -43,7 +44,7 @@ export default function Prompt() {
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
         <Navbar />
-        <div className="pt-16 px-7 flex flex-col gap-7"> 
+        <div className="py-16 px-7 flex flex-col gap-7 bg-skin-fill"> 
           <div className="flex flex-row items-center bg-skin-bg-secundary h-10 rounded-md py-2 px-4 gap-2">
             <TextSelect className="text-skin-base" />
             <p className="text-skin-base">{video?.transcription.substring(0,50)} ...</p>
@@ -70,7 +71,10 @@ export default function Prompt() {
               onChange={(event) => setTemplate(event.target.value)}
             />
             <div className="flex flex-row items-center gap-3 text-skin-base">
-              <p>Temperature:</p>
+              <div className="flex flex-row items-center gap-1">
+                {temperature > 0.5 ? <ThermometerSun /> : <ThermometerSnowflake />}
+                <p>Temperature:</p>
+              </div>
               <p>{temperature}</p>
               <Slider 
                 min={0} 
@@ -81,8 +85,17 @@ export default function Prompt() {
                 onValueChange={(event) => {setTemperature(event[0])}} 
               />
             </div>
-            <div>
-
+            <Button>
+              Execute
+            </Button>
+            <div> 
+            <textarea 
+              id="prompt" 
+              className="w-full bg-skin-bg-secundary h-80 resize-none p-4 text-skin-base border border-skin-bg-muted rounded-sm" 
+              placeholder="Include the prompt for the AI..."
+              value={template}
+              onChange={(event) => setTemplate(event.target.value)}
+            />
             </div>
           </form>
         </div>
