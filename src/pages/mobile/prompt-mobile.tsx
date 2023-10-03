@@ -17,9 +17,20 @@ interface PromptProps {
 
 export default function Prompt() {
   const [ prompts, setPrompts ] = useState<PromptProps[] | null>(null)
+  const [ template, setTemplate ] = useState<string>('')
 
   const { theme } = useContext(ThemeContext)
   const { video } = useContext(VideoContext)
+
+  function handleSelectChange(promptId: string) {
+    const promptSelected = prompts?.find(prompt => prompt.id === promptId)
+
+    if(!promptSelected) { 
+        return
+    }
+
+    setTemplate(promptSelected.template)
+}
 
   useEffect(() => {
     api.get('/prompts').then(res => {
@@ -37,7 +48,9 @@ export default function Prompt() {
           </div>
           <form className="flex flex-col gap-5">
             <div className="flex flex-row gap-5">
-                <NewSelect placeholder="Select the base prompt...">
+                <NewSelect 
+                onValueChange={handleSelectChange}
+                placeholder="Select the base prompt...">
                   <SelectGroup>
                     <SelectLabel>Prompts</SelectLabel>
                     {prompts?.map((prompt, index) => {
@@ -48,9 +61,11 @@ export default function Prompt() {
                 <NewSelect disabled placeholder="GPT 3.5 turbo 16k" />
             </div>   
             <textarea 
-              id="" 
+              id="prompt" 
               className="w-full bg-skin-bg-secundary h-80 resize-none p-4 text-skin-base border border-skin-bg-muted rounded-sm" 
               placeholder="Include the prompt for the AI..."
+              value={template}
+              onChange={(event) => setTemplate(event.target.value)}
             />
             <div>
 

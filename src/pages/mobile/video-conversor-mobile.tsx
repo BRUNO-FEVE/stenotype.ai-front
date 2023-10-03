@@ -126,7 +126,7 @@ export default function VideoConversorMobile() {
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
       <Navbar />
-      <form onSubmit={handleSubimit} className=" flex flex-col px-20 flex-1 justify-center gap-6">
+      <form onSubmit={handleSubimit} className=" flex flex-col px-7 flex-1 justify-center gap-6">
         <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
           {previewURL ? 
             <>
