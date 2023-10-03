@@ -1,17 +1,21 @@
 import * as React from "react"
 import { ThemeContext } from '@/context/theme-context';
 import * as Select from '@radix-ui/react-select';
-import { ChevronDown, LucideIcon, Check } from 'lucide-react'
+import { ChevronDown, Check } from 'lucide-react'
 import { useContext } from 'react';
 
-function NewSelect({children, ...props}: React.ComponentPropsWithRef<typeof Select.Root>) {
+interface NewSelectProps extends React.ComponentPropsWithRef<typeof Select.Root> {
+    placeholder: string
+}
+
+function NewSelect({placeholder, children, ...props}: NewSelectProps) {
 
   const { theme } = useContext(ThemeContext)
 
   return (
     <Select.Root {...props}>
-        <Select.Trigger className={`${theme ? 'theme-white' : null} bg-skin-bg-secundary box-border w-full flex flex-row justify-between items-center text-skin-base border border-skin-bg-muted rounded-sm py-2 px-4`} >
-            <Select.Value placeholder="Select the base prompt..." />
+        <Select.Trigger className={`${theme ? 'theme-white' : null} disabled:cursor-not-allowed data-[disabled]:text-skin-muted bg-skin-bg-secundary box-border w-full flex flex-row justify-between items-center text-skin-base border border-skin-bg-muted rounded-sm py-2 px-4`} >
+            <Select.Value placeholder={placeholder}/>
             <Select.Icon>
                 <ChevronDown />
             </Select.Icon>
@@ -21,7 +25,7 @@ function NewSelect({children, ...props}: React.ComponentPropsWithRef<typeof Sele
                 position='popper' 
                 align='center'
                 sideOffset={7} 
-                className={`${theme ? 'theme-white' : null} backdrop-blur box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
+                className={`${theme ? 'theme-white' : null} backdrop-blur-md box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
             >
                 <Select.Viewport>
                     {children}
@@ -42,7 +46,6 @@ function SelectGroup ({children, ...props}: React.ComponentPropsWithoutRef<typeo
 
 interface SelectItemProps extends React.ComponentPropsWithRef<typeof Select.Item> {
     label: string
-    Icon: LucideIcon
 }
 
 function SelectItem ({ label, ref , ...props }: SelectItemProps) {
