@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { NewSelect } from "@/components/ui/select";
 import { SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
 import { api } from "@/lib/axios";
+import Slider from "@/components/ui/slider";
 
 interface PromptProps {
   id: string
@@ -18,6 +19,7 @@ interface PromptProps {
 export default function Prompt() {
   const [ prompts, setPrompts ] = useState<PromptProps[] | null>(null)
   const [ template, setTemplate ] = useState<string>('')
+  const [ temperature, setTemperature ] = useState<number>(0.5)
 
   const { theme } = useContext(ThemeContext)
   const { video } = useContext(VideoContext)
@@ -42,9 +44,9 @@ export default function Prompt() {
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
         <Navbar />
         <div className="pt-16 px-7 flex flex-col gap-7"> 
-          <div className="flex flex-row items-center bg-skin-bg-secundary h-10 rounded-md py-2 gap-2">
+          <div className="flex flex-row items-center bg-skin-bg-secundary h-10 rounded-md py-2 px-4 gap-2">
             <TextSelect className="text-skin-base" />
-            <p className="text-skin-base">{video?.transcription.substring(0,59)} ...</p>
+            <p className="text-skin-base">{video?.transcription.substring(0,50)} ...</p>
           </div>
           <form className="flex flex-col gap-5">
             <div className="flex flex-row gap-5">
@@ -67,6 +69,18 @@ export default function Prompt() {
               value={template}
               onChange={(event) => setTemplate(event.target.value)}
             />
+            <div className="flex flex-row items-center gap-3 text-skin-base">
+              <p>Temperature:</p>
+              <p>{temperature}</p>
+              <Slider 
+                min={0} 
+                step={0.1}
+                max={1} 
+                defaultValue={[temperature]} 
+                value={[temperature]} 
+                onValueChange={(event) => {setTemperature(event[0])}} 
+              />
+            </div>
             <div>
 
             </div>
