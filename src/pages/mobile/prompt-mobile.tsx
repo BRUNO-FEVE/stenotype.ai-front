@@ -77,8 +77,8 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
         <Navbar />
-        <div className="py-16 px-7 flex flex-col gap-7 bg-skin-fill"> 
-          <div className="flex flex-row items-center bg-skin-bg-secundary h-10 rounded-md py-2 px-4 gap-2">
+        <div className="py-16 pt-24 px-7 flex flex-col gap-7 bg-skin-fill"> 
+          <div className="flex flex-row justify-center items-center bg-skin-bg-secundary h-10 rounded-md py-2 px-4 gap-2 border border-skin-bg-muted">
             <TextSelect className="text-skin-base" />
             <p className="text-skin-base">{video?.transcription.substring(0,50)} ...</p>
           </div>
@@ -123,18 +123,21 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
             </Button>
             <div> 
             <div className="h-80 bg-skin-bg-secundary py-4 flex flex-col justify-around gap-3 text-skin-base border border-skin-bg-muted rounded-sm">
-              <div className="flex flex-row justify-between items-center px-4">
-                <div className="flex flex-row gap-2 items-center">
-                  <CopyToClipboard text={completion}>
-                      {React.createElement(clipboardIcon, { onClick: (handleClipBoardClick), className: 'w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer' })}
-                  </CopyToClipboard>
-                  <p className={`text-sm text-skin-muted ${clipboardIcon === Check ? 'block' : 'invisible'}`} >Copied</p>
-                </div>
-                <div className="flex flex-row gap-2 items-center">
-                  <ThumbsUp className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
-                  <ThumbsDown className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
-                </div>
-              </div>
+                {completion ? 
+                    <div className="flex flex-row justify-between items-center px-4">
+                      <div className="flex flex-row gap-2 items-center">
+                        <CopyToClipboard text={completion}>
+                            {React.createElement(clipboardIcon, { onClick: (handleClipBoardClick), className: 'w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer' })}
+                        </CopyToClipboard>
+                        <p className={`text-sm text-skin-muted ${clipboardIcon === Check ? 'block' : 'invisible'}`} >Copied</p>
+                      </div>
+                      <div className="flex flex-row gap-2 items-center">
+                        <ThumbsUp className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
+                        <ThumbsDown className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
+                      </div>
+                    </div>
+                  : null
+                }
               <textarea 
                 id="prompt" 
                 className="w-full h-72 bg-transparent resize-none px-4 focus:border-none outline-none" 
