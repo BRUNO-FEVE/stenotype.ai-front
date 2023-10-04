@@ -8,7 +8,7 @@ export default function Navbar() {
   const { theme, handleThemeChange } = useContext(ThemeContext)
 
   return (
-    <div className='flex flex-row items-center py-5 px-6 gap-4 [&>*]:text-skin-base justify-between'>
+    <div className='fixed w-full flex flex-row items-center py-5 px-6 gap-4 [&>*]:text-skin-base justify-between backdrop-blur-sm'>
         <div className='flex flex-row gap-3'>
           <Link to={'/'}><h1 className="font-bold text-2xl sm:text-xl">stenotype.ai</h1></Link>
           {/* <button className="text-sm text-skin-muted hover:underline underline-offset-4">Documentation</button> */}
