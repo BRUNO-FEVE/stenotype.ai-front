@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import { TextSelect, ThermometerSun, ThermometerSnowflake } from 'lucide-react'
+import { TextSelect, ThermometerSun, ThermometerSnowflake, Clipboard, Check, ThumbsUp, LucideIcon, ThumbsDown } from 'lucide-react'
 import { ThemeContext } from "@/context/theme-context";
 import { VideoContext } from "@/context/video-context";
 import { useContext, useEffect, useState } from "react";
@@ -8,7 +8,9 @@ import { SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
 import { api } from "@/lib/axios";
 import Slider from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { useCompletion } from 'ai/react'
+import { useCompletion } from 'ai/react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import React from "react";
 
 interface PromptProps {
   id: string
@@ -20,6 +22,7 @@ export default function Prompt() {
   const [ prompts, setPrompts ] = useState<PromptProps[] | null>(null)
   const [ template, setTemplate ] = useState<string>('')
   const [ temperature, setTemperature ] = useState<number>(0.5)
+  const [ clipboardIcon, setClipboardIcon ] = useState<LucideIcon>(Clipboard)
 
   const { theme } = useContext(ThemeContext)
   const { video } = useContext(VideoContext)
@@ -47,6 +50,14 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
   }
 })
 
+  const handleClipBoardClick = () => {
+    setClipboardIcon(Check)
+
+    setTimeout(() => {
+      setClipboardIcon(Clipboard)
+    }, 1500) // 1.5 sec
+  }
+
 
   useEffect(() => {
     api.get('/prompts').then(res => {
@@ -58,6 +69,10 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
     setInput(template)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [template])
+
+  useEffect(() => {
+    
+  }, [isLoading])
 
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
@@ -107,13 +122,27 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
               Execute
             </Button>
             <div> 
-            <textarea 
-              id="prompt" 
-              className="w-full bg-skin-bg-secundary h-80 resize-none p-4 text-skin-base border border-skin-bg-muted rounded-sm" 
-              placeholder="Include the prompt for the AI..."
-              value={completion}
-              readOnly
-            />
+            <div className="h-80 bg-skin-bg-secundary py-4 flex flex-col justify-around gap-3 text-skin-base border border-skin-bg-muted rounded-sm">
+              <div className="flex flex-row justify-between items-center px-4">
+                <div className="flex flex-row gap-2 items-center">
+                  <CopyToClipboard text={completion}>
+                      {React.createElement(clipboardIcon, { onClick: (handleClipBoardClick), className: 'w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer' })}
+                  </CopyToClipboard>
+                  <p className={`text-sm text-skin-muted ${clipboardIcon === Check ? 'block' : 'invisible'}`} >Copied</p>
+                </div>
+                <div className="flex flex-row gap-2 items-center">
+                  <ThumbsUp className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
+                  <ThumbsDown className="w-5 h-5 text-skin-muted  hover:text-skin-base cursor pointer" />
+                </div>
+              </div>
+              <textarea 
+                id="prompt" 
+                className="w-full h-72 bg-transparent resize-none px-4 focus:border-none outline-none" 
+                placeholder="Include the prompt for the AI..."
+                value={completion}
+                readOnly
+              />
+            </div>
             </div>
           </form>
         </div>
