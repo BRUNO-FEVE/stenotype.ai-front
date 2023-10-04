@@ -25,7 +25,7 @@ function NewSelect({placeholder, children, ...props}: NewSelectProps) {
                 position='popper' 
                 align='center'
                 sideOffset={7} 
-                className={`${theme ? 'theme-white' : null} backdrop-blur-md box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
+                className={`${theme ? 'theme-white' : null} bg-skin-bg-secundary box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
             >
                 <Select.Viewport>
                     {children}
