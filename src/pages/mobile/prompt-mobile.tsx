@@ -1,5 +1,3 @@
-// import { useContext } from "react";
-
 import Navbar from "@/components/navbar";
 import { TextSelect, ThermometerSun, ThermometerSnowflake } from 'lucide-react'
 import { ThemeContext } from "@/context/theme-context";
@@ -10,6 +8,7 @@ import { SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
 import { api } from "@/lib/axios";
 import Slider from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
+import { useCompletion } from 'ai/react'
 
 interface PromptProps {
   id: string
@@ -24,6 +23,7 @@ export default function Prompt() {
 
   const { theme } = useContext(ThemeContext)
   const { video } = useContext(VideoContext)
+  const videoId = video?.id
 
   function handleSelectChange(promptId: string) {
     const promptSelected = prompts?.find(prompt => prompt.id === promptId)
@@ -35,11 +35,29 @@ export default function Prompt() {
     setTemplate(promptSelected.template)
 }
 
+const { setInput, handleSubmit, isLoading, completion } = useCompletion({
+  api: 'https://upload-ai-back.vercel.app/ai/complete', // --> PROD
+  // api: 'http://localhost:3333/ai/complete', // --> DEV
+  body: {
+      videoId,
+      temperature,
+  },
+  headers: {
+      "Content-type": "application/json",
+  }
+})
+
+
   useEffect(() => {
     api.get('/prompts').then(res => {
       setPrompts(res.data)
     })
   }, [])
+
+  useEffect(() => {
+    setInput(template)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [template])
 
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
@@ -49,7 +67,7 @@ export default function Prompt() {
             <TextSelect className="text-skin-base" />
             <p className="text-skin-base">{video?.transcription.substring(0,50)} ...</p>
           </div>
-          <form className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-row gap-5">
                 <NewSelect 
                 onValueChange={handleSelectChange}
@@ -85,7 +103,7 @@ export default function Prompt() {
                 onValueChange={(event) => {setTemperature(event[0])}} 
               />
             </div>
-            <Button>
+            <Button disabled={isLoading ? true : false}>
               Execute
             </Button>
             <div> 
@@ -93,8 +111,8 @@ export default function Prompt() {
               id="prompt" 
               className="w-full bg-skin-bg-secundary h-80 resize-none p-4 text-skin-base border border-skin-bg-muted rounded-sm" 
               placeholder="Include the prompt for the AI..."
-              value={template}
-              onChange={(event) => setTemplate(event.target.value)}
+              value={completion}
+              readOnly
             />
             </div>
           </form>

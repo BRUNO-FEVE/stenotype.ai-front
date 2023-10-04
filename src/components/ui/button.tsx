@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from 'lucide-react'
-import {  HtmlHTMLAttributes, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 interface NewPageButtonProps {
@@ -16,7 +16,7 @@ export default function PageButton({to}: NewPageButtonProps) {
   )
 }
 
-interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
