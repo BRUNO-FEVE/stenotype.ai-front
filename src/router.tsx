@@ -4,6 +4,7 @@ import Prompt from './pages/mobile/prompt-mobile'
 import VideoConversorMobile from './pages/mobile/video-conversor-mobile'
 import useWindowResize from './hooks/useWindowResize'
 import TranscriptionMobile from './pages/mobile/transcription-mobile'
+import ControlStation from './pages/control-station'
 
 export default function AppRouter() {
   const { width } = useWindowResize()
@@ -12,7 +13,7 @@ export default function AppRouter() {
     width ? 
       <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='conversor' element={width > 1000 ? null : <VideoConversorMobile />} />
+          <Route path='conversor' element={width > 1000 ? <ControlStation /> : <VideoConversorMobile />} />
           <Route path='transcription' element={<TranscriptionMobile />} />
           <Route path='prompt' element={<Prompt />} />
       </Routes>
