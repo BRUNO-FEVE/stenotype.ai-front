@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar"
+import BackgroundBlur from "@/components/ui/background-blur"
 import NewPageButton from "@/components/ui/button"
 import { ThemeContext } from "@/context/theme-context"
 import { VideoContext } from "@/context/video-context"
@@ -130,7 +131,7 @@ export default function VideoConversorMobile() {
         <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
           {previewURL ? 
             <>
-              <div className="relative"> 
+              <div className="relative z-10"> 
                 <video src={previewURL} controls={false} className={`pointer-events-none max-h-60 ${button === "converting" || button === "transcripting" ? null : null}`} />
                 {/* {button === "converting" || button === "transcripting" ? <Loader2Icon className="w-8 h-8 text-skin-base absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-spin" /> : null} */}
               </div>
@@ -140,6 +141,14 @@ export default function VideoConversorMobile() {
               <FileVideo className="w-6 h-6" onChange={() => {console.log('teste')}}/>
               Selecione um video
             </>
+          }
+          {button === 'transcripting' || button === 'converting' ? 
+            <>
+              <BackgroundBlur color="red" className="top-10 left-3 animate-pulse" />
+              <BackgroundBlur color="violet" className="bottom-56 right-3 animate-pulse" />
+            </>
+            : 
+            null
           }
         </label>
         <input 
@@ -153,19 +162,19 @@ export default function VideoConversorMobile() {
         }}
         />
         <div className="flex flex-col gap-2">
-          <label htmlFor="transcription_prompt" className="text-skin-base">Prompt de transcrição :</label>
+          <label htmlFor="transcription_prompt" className="text-skin-base z-10">Prompt de transcrição :</label>
           <textarea 
             ref={promptRef}
             id="transcription_prompt"
             placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)"
-            className="bg-skin-bg-secundary resize-none h-20 border border-skin-bg-muted rounded-md placeholder:p-2 text-skin-base p-2"
+            className="z-10 bg-skin-bg-secundary resize-none h-20 border border-skin-bg-muted rounded-md placeholder:p-2 text-skin-base p-2"
             disabled={button ? true : false}
           />
         </div>
         <button
           data-success={button === 'completed'}
           type="submit"
-          className=" bg-skin-button-accent hover:bg-skin-button-accent-hover text-white py-3 rounded-sm data-[success=true]:bg-emerald-500 flex flex-row items-center justify-center gap-3"
+          className="z-10 bg-skin-button-accent hover:bg-skin-button-accent-hover text-white py-3 rounded-sm data-[success=true]:bg-emerald-500 flex flex-row items-center justify-center gap-3"
         >
           {button ? 
             <>

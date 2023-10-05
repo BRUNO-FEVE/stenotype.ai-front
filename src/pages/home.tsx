@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar"
+import BackgroundBlur from "@/components/ui/background-blur"
 import { ThemeContext } from "@/context/theme-context"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
@@ -21,8 +22,8 @@ export default function Home() {
             className="text-white text-xl z-10 px-4 py-2 rounded-md hover:bg-skin-button-accent-hover bg-skin-button-accent">
               <button>Get Started for free</button>
           </Link>
-          <div className={`rounded-full h-80 w-80 ${theme ? 'bg-violet-500' : 'bg-violet-800'} blur-3xl absolute top-24 left-24`} />
-          <div className={`rounded-full h-80 w-80 ${theme ? 'bg-red-500' : 'bg-red-800'} blur-3xl absolute bottom-24 left-32`} />
+          <BackgroundBlur color="violet" className="top-24 left-24" />
+          <BackgroundBlur color="red" className="bottom-24 left-32" />
         </div>
         <div className="h-full w-1/2 lg:flex hidden lg:flex-row">
           
