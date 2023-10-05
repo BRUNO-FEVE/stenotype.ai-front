@@ -3,6 +3,7 @@ import { ThemeContext } from '@/context/theme-context';
 import * as Select from '@radix-ui/react-select';
 import { ChevronDown, Check } from 'lucide-react'
 import { useContext } from 'react';
+import { twMerge } from "tailwind-merge";
 
 interface NewSelectProps extends React.ComponentPropsWithRef<typeof Select.Root> {
     placeholder: string
@@ -38,7 +39,7 @@ function NewSelect({placeholder, children, ...props}: NewSelectProps) {
 
 function SelectGroup ({children, ...props}: React.ComponentPropsWithoutRef<typeof Select.Group>) {
     return (
-        <Select.Group className='flex flex-col gap-1 focus:border-none' {...props}>
+        <Select.Group {...props} className={twMerge('flex flex-col gap-1 focus:border-none', props.className)} >
             {children}
         </Select.Group>
     )
@@ -51,9 +52,9 @@ interface SelectItemProps extends React.ComponentPropsWithRef<typeof Select.Item
 function SelectItem ({ label, ref , ...props }: SelectItemProps) {
     return (
         <Select.Item
-            className='flex items-center gap-2 pl-8 py-2 text-skin-base outline-none hover:border-none hover:bg-skin-button-accent hover:text-white rounded-md cursor-pointer'
-            ref={ref}
             {...props}
+            className={twMerge('flex items-center gap-2 pl-8 py-2 text-skin-base outline-none hover:border-none hover:bg-skin-button-accent hover:text-white rounded-md cursor-pointer', props.className)}
+            ref={ref}
         >
             <Select.ItemText>{label}</Select.ItemText>
             <Select.ItemIndicator className="absolute left-2">
@@ -66,14 +67,14 @@ function SelectItem ({ label, ref , ...props }: SelectItemProps) {
 
 function SelectLabel ({ref, ...props}: React.ComponentPropsWithRef<typeof Select.Label>) {
     return (
-        <Select.Label className='text-skin-muted pl-8' ref={ref} {...props} />
+        <Select.Label {...props} className={twMerge('text-skin-muted pl-8', props.className)} ref={ref} />
     )
 }
 
 function SelectSeparator ({...props}: React.ComponentPropsWithoutRef<typeof Select.Separator>) {
     return (
         <div className="px-2 py-2">
-            <Select.Separator className='h-[1px] bg-zinc-400' {...props}/>
+            <Select.Separator {...props} className={twMerge('h-[1px] bg-zinc-400', props.className)} />
         </div>
     )
 }

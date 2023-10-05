@@ -33,6 +33,7 @@ export default function BackgroundBlur({ color, ...props }: BackgroundBlurProps)
 
     return (
         <div
+            {...props}
             className={twMerge(`rounded-full bg-ora h-80 w-80 ${theme ? selectedColorVariant.lither : selectedColorVariant.darker} blur-3xl absolute`, props.className)}
         />
     );
