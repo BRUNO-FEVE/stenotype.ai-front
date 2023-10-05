@@ -70,10 +70,6 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [template])
 
-  useEffect(() => {
-    
-  }, [isLoading])
-
   return (
     <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
         <Navbar />
