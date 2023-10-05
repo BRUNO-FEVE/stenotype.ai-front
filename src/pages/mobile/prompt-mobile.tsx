@@ -3,7 +3,7 @@ import { TextSelect, ThermometerSun, ThermometerSnowflake, Clipboard, Check, Thu
 import { ThemeContext } from "@/context/theme-context";
 import { VideoContext } from "@/context/video-context";
 import { useContext, useEffect, useState } from "react";
-import { NewSelect } from "@/components/ui/select";
+import { Select } from "@/components/ui/select";
 import { SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
 import { api } from "@/lib/axios";
 import Slider from "@/components/ui/slider";
@@ -80,7 +80,7 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-row gap-5">
-                <NewSelect 
+                <Select 
                 onValueChange={handleSelectChange}
                 placeholder="Select the base prompt...">
                   <SelectGroup>
@@ -89,8 +89,8 @@ const { setInput, handleSubmit, isLoading, completion } = useCompletion({
                       return(<SelectItem key={index} label={prompt.title} value={prompt.id} />)
                     })}
                   </SelectGroup>
-                </NewSelect>
-                <NewSelect disabled placeholder="GPT 3.5 turbo 16k" />
+                </Select>
+                <Select disabled placeholder="GPT 3.5 turbo 16k" />
             </div>   
             <textarea 
               id="prompt" 
