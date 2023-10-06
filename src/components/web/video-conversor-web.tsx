@@ -6,6 +6,7 @@ import { fetchFile } from "@ffmpeg/util"
 import { FileVideo, CheckCircle, Upload } from "lucide-react"
 import { useRef, useState, useContext, ChangeEvent, useMemo, FormEvent } from "react"
 import BackgroundBlur from "../ui/background-blur"
+import TextArea from "../ui/text-area"
 
 const ButtonStatesProps = {
   converting: 'Convertendo...',
@@ -123,65 +124,63 @@ export default function VideoConversorWeb() {
   return (  
     <form onSubmit={handleSubimit} className="w-1/2 h-full flex flex-col justify-evenly">
       <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
-                            {previewURL ? 
-                                <>
-                                <div className="relative z-10"> 
-                                    <video src={previewURL} controls={false} className={`pointer-events-none max-h-60 ${button === "converting" || button === "transcripting" ? null : null}`} />
-                                </div>
-                                </>
-                                : 
-                                <>
-                                <FileVideo className="w-6 h-6" onChange={() => {console.log('teste')}}/>
-                                Selecione um video
-                                </>
-                            }
-                            {button === 'transcripting' || button === 'converting' ? 
-                                <>
-                                <BackgroundBlur color="red" className="top-10 -left-10 animate-pulse" />
-                                </>
-                                : 
-                                null
-                            }
-                            </label>
-                            <input 
-                            type="file" 
-                            id="video" 
-                            accept="video/mp4" 
-                            className="sr-only" 
-                            onChange={(event) => {
-                            handleFileSelected(event)
-                            setButton(null)
-                            }}
-                            />
-                        <div className="w-full flex flex-col gap-2">
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="transcription_prompt" className="text-skin-base z-10">Prompt de transcrição :</label>
-                                <textarea 
-                                    ref={promptRef}
-                                    id="transcription_prompt"
-                                    placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)"
-                                    className="z-10 bg-skin-bg-secundary resize-none h-20 border border-skin-bg-muted rounded-md placeholder:p-2 text-skin-base p-2"
-                                    disabled={button ? true : false}
-                                />
-                            </div>
-                            <button
-                            data-success={button === 'completed'}
-                            type="submit"
-                            className="z-10 bg-skin-button-accent hover:bg-skin-button-accent-hover text-white py-3 rounded-sm data-[success=true]:bg-emerald-500 flex flex-row items-center justify-center gap-3"
-                            >
-                            {button ? 
-                                <>
-                                {ButtonStatesProps[button]}
-                                {button === 'completed' ? <CheckCircle className="h-4 w-4" /> : null} 
-                                </>
-                                : 
-                                <>
-                                Carregar Video
-                                <Upload className="h-4 w-4"/>
-                                </>
-                            }
-                            </button>
-                        </div>
+        {previewURL ? 
+          <>
+            <div className="relative z-10"> 
+              <video src={previewURL} controls={false} className={`pointer-events-none max-h-60 ${button === "converting" || button === "transcripting" ? null : null}`} />
+            </div>
+          </>
+            : 
+          <>
+            <FileVideo className="w-6 h-6" onChange={() => {console.log('teste')}}/>
+              Upload a video 
+          </>
+        }
+        {button === 'transcripting' || button === 'converting' ? 
+          <>
+            <BackgroundBlur color="red" className="top-10 -left-10 animate-pulse" />
+          </>
+              : 
+          null
+        }
+      </label>
+      <input 
+        type="file" 
+        id="video" 
+        accept="video/mp4" 
+        className="sr-only" 
+        onChange={(event) => {
+          handleFileSelected(event)
+          setButton(null)
+        }}
+      />
+        <div className="flex flex-col gap-2">
+          <label htmlFor="transcription_prompt" className="text-skin-base z-10">Prompt de transcrição :</label>
+          <TextArea 
+            ref={promptRef}
+            id="transcription_prompt"
+            placeholder="Include keywords mentioned in the video, separated by commas (,)."
+            className="z-10 h-20"
+            disabled={button ? true : false}
+          />
+        </div>
+        <button
+          data-success={button === 'completed'}
+          type="submit"
+          className="z-10 bg-skin-button-accent hover:bg-skin-button-accent-hover text-white py-3 rounded-sm data-[success=true]:bg-emerald-500 flex flex-row items-center justify-center gap-3"
+        >
+          {button ? 
+            <>
+              {ButtonStatesProps[button]}
+              {button === 'completed' ? <CheckCircle className="h-4 w-4" /> : null} 
+            </>
+                : 
+            <>
+              Carregar Video
+              <Upload className="h-4 w-4"/>
+            </>
+          }
+        </button>
     </form>
   )
 }
