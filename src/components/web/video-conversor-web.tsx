@@ -157,7 +157,7 @@ export default function VideoConversorWeb() {
         <div className="flex flex-col gap-2">
           <label htmlFor="transcription_prompt" className="text-skin-base z-10">Prompt de transcrição :</label>
           <TextArea 
-            ref={promptRef}
+            inputRef={promptRef}
             id="transcription_prompt"
             placeholder="Include keywords mentioned in the video, separated by commas (,)."
             className="z-10 h-20"
