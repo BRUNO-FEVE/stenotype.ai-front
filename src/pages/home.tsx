@@ -1,18 +1,13 @@
-import Navbar from "@/components/navbar"
+import DefaultPageLayout from "@/components/default-page-layout"
 import BackgroundBlur from "@/components/ui/background-blur"
-import { ThemeContext } from "@/context/theme-context"
-import { useContext } from "react"
 import { Link } from "react-router-dom"
 // import useWindowResize from "@/hooks/useWindowResize"
 
 export default function Home() {
   // const { width } = useWindowResize()
 
-  const { theme } = useContext(ThemeContext)
-
   return (
-    <div className={`bg-skin-fill flex flex-col items-center h-screen ${theme ? 'theme-white' : null}`}>
-      <Navbar/>
+    <DefaultPageLayout className="w-screen items-center">
       <div className="flex-1 flex flex-row w-full max-w-screen-2xl relative">
         <div className="lg:w-1/2 w-full  flex flex-col gap-6 justify-center px-6 lg:pl-20 h-full items-center lg:items-start">
           <h1 className="font text-5xl text-center md:text-6xl lg:text-left lg:text-7xl text-skin-base z-10 leading-10">ELEVATE YOUR PRODUCTIVITY <br/> WITH AI</h1>
@@ -23,12 +18,12 @@ export default function Home() {
               <button>Get Started for free</button>
           </Link>
           <BackgroundBlur color="violet" className="top-32 left-24" />
-          <BackgroundBlur color="red" className="bottom-32 left-32" />
+          <BackgroundBlur color="red" className="bottom-16 left-32" />
         </div>
         <div className="h-full w-1/2 lg:flex hidden lg:flex-row">
           
         </div>
       </div>
-    </div>
+    </DefaultPageLayout>
   )
 }

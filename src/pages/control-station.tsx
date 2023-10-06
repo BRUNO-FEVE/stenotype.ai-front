@@ -1,14 +1,13 @@
-import Navbar from "@/components/navbar";
 import { Clipboard, Check, ThumbsDown, ThumbsUp, LucideIcon, } from 'lucide-react'
 import VideoConversorWeb from "@/components/web/video-conversor-web";
-import { ThemeContext } from "@/context/theme-context";
-import {  useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import React from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import TextArea from "@/components/ui/text-area";
 import Icon from "@/components/ui/icon";
 import PromptWeb from "@/components/web/prompt-web";
 import { api } from "@/lib/axios";
+import DefaultPageLayout from "@/components/default-page-layout";
 
 interface PromptProps {
     id: string
@@ -21,8 +20,6 @@ export default function ControlStation() {
     const [ template, setTemplate ] = useState<string>('')
     const [ clipboardIcon, setClipboardIcon ] = useState<LucideIcon>(Clipboard)
     const [ aiResponse, setAiResponse ] = useState<string | undefined>(undefined)
-
-    const { theme } = useContext(ThemeContext)
 
     function handleSelectChange(promptId: string) {
         const promptSelected = prompts?.find(prompt => prompt.id === promptId)
@@ -51,9 +48,8 @@ export default function ControlStation() {
 
 
   return (
-    <div className={`${theme ? 'theme-white' : null} flex flex-col justify-center bg-skin-fill items-center`}>
-        <Navbar />
-        <div className="bg-skin-fill text-skin-base h-screen max-w-screen-2xl pt-24 px-4 pb-4 flex flex-row gap-6">
+    <DefaultPageLayout className="items-center h-screen py-0">
+        <div className="bg-skin-fill text-skin-base h-screen max-w-screen-2xl pt-24 px-4 pb-6 flex flex-row gap-6">
             <div className="w-3/5 h-full flex flex-col gap-2">
                 <div className="h-3/5 w-full flex flex-row gap-6">
                     <VideoConversorWeb />
@@ -97,6 +93,6 @@ export default function ControlStation() {
                 />
             </div>
         </div>
-    </div>
+    </DefaultPageLayout>
   )
 }

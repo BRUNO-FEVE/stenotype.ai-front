@@ -122,7 +122,7 @@ export default function VideoConversorWeb() {
         setVideo(video)
       }
   return (  
-    <form onSubmit={handleSubimit} className="w-1/2 h-full flex flex-col justify-evenly">
+    <form onSubmit={handleSubimit} className="w-1/2 h-full flex flex-col justify-between pb-7">
       <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
         {previewURL ? 
           <>
