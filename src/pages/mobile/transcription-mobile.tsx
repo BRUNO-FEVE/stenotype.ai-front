@@ -16,7 +16,7 @@ export default function TranscriptionMobile() {
         <Navbar></Navbar>
         <div className="px-7 pt-24 py-7 flex flex-col gap-7">
             <h1 className="text-skin-base font-bold text-2xl text-center">Generated Transcription</h1>
-            <p className="w-full h-96 py-8 px-6 bg-skin-bg-secundary text-skin-base overflow-scroll leading-8 rounded-md text-justify">{video?.transcription}</p>
+            <p className="w-full h-96 py-8 px-6 bg-skin-bg-secundary text-skin-base overflow-x-hidden overflow-scroll leading-8 rounded-md text-justify">{video?.transcription}</p>
             <div className="flex flex-row gap-2 pl-4">
               <TextCursorInputIcon className="text-skin-base" />
               <p className="text-skin-base"><span className="font-bold">Key Words: </span>{prompt ? prompt : 'Não Fornecido'}</p>

@@ -73,7 +73,7 @@ export default function PromptWeb({ setCompletion, setPrompt, prompt }: PromptWe
                 : 
                     <>
                         Execute
-                        <Icon Icon={ArrowRight} classname="text-skin-base"></Icon>
+                        <Icon Icon={ArrowRight} classname="text-white"></Icon>
                     </>
                 }
             </Button>

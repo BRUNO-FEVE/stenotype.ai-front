@@ -20,9 +20,9 @@ body {
     }
     .theme-white {
         --color-background: #ffffff;
-        --color-secondary: #edf2f4;
+        --color-secondary: #f0f2f3;
         --color-text-base: #000000;
-        --color-text-muted: #442d39;
+        --color-text-muted: #888e94;
         --color-text-inverted: #2D2DC8;
         --color-fill: #2D2DC8;
         --color-button-accent: #2D2DC8;

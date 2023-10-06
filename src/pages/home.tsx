@@ -11,11 +11,11 @@ export default function Home() {
   const { theme } = useContext(ThemeContext)
 
   return (
-    <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
+    <div className={`bg-skin-fill flex flex-col items-center h-screen ${theme ? 'theme-white' : null}`}>
       <Navbar/>
-      <div className="flex-1 flex flex-row">
+      <div className="flex-1 flex flex-row w-full max-w-screen-2xl relative">
         <div className="lg:w-1/2 w-full  flex flex-col gap-6 justify-center px-6 lg:pl-20 h-full items-center lg:items-start">
-          <h1 className="text-bold text-5xl text-center md:text-6xl lg:text-left lg:text-7xl text-skin-base z-10 leading-10">ELEVATE YOUR PRODUCTIVITY <br/> WITH AI</h1>
+          <h1 className="font text-5xl text-center md:text-6xl lg:text-left lg:text-7xl text-skin-base z-10 leading-10">ELEVATE YOUR PRODUCTIVITY <br/> WITH AI</h1>
           <p className="text-skin-muted z-10 px-16 lg:px-0 lg:pr-28 lg:text-left text-center">Harness the full potential of Stenotype.ai to craft engaging social media content or even streamline a complex lecture.</p>
           <Link 
             to={'/conversor'}
