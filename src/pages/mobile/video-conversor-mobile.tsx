@@ -1,6 +1,7 @@
-import Navbar from "@/components/navbar"
+import DefaultPageLayout from "@/components/default-page-layout"
 import BackgroundBlur from "@/components/ui/background-blur"
 import NewPageButton from "@/components/ui/button"
+import TextArea from "@/components/ui/text-area"
 import { ThemeContext } from "@/context/theme-context"
 import { VideoContext } from "@/context/video-context"
 import { api } from "@/lib/axios"
@@ -125,8 +126,7 @@ export default function VideoConversorMobile() {
   }
 
   return (
-    <div className={`bg-skin-fill flex flex-col h-screen ${theme ? 'theme-white' : null}`}>
-      <Navbar />
+    <DefaultPageLayout>
       <form onSubmit={handleSubimit} className=" flex flex-col px-7 flex-1 justify-center gap-6">
         <label htmlFor="video" className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${videofile ? null : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${theme ? 'hover:bg-black/10' : 'hover:bg-white/10'}`} `}>
           {previewURL ? 
@@ -163,11 +163,10 @@ export default function VideoConversorMobile() {
         />
         <div className="flex flex-col gap-2">
           <label htmlFor="transcription_prompt" className="text-skin-base z-10">Prompt de transcrição :</label>
-          <textarea 
-            ref={promptRef}
+          <TextArea 
+            inputRef={promptRef}
             id="transcription_prompt"
             placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)"
-            className="z-10 bg-skin-bg-secundary resize-none h-20 border border-skin-bg-muted rounded-md placeholder:p-2 text-skin-base p-2"
             disabled={button ? true : false}
           />
         </div>
@@ -190,13 +189,13 @@ export default function VideoConversorMobile() {
         </button>
         {button === 'completed' ? 
           <>
-            <p className="text-md text-skin-base italic">Etapa concluida, agora vá para a proxima etapa e veja a transcrição do seu video.</p> 
+            <p className="text-md text-skin-muted italic">Etapa concluida, agora vá para a proxima etapa e veja a transcrição do seu video.</p> 
             <NewPageButton to="/transcription" />
           </>
         : 
           null
       }
       </form>
-    </div>
+    </DefaultPageLayout>
   )
 }
