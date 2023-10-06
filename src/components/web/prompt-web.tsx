@@ -60,7 +60,7 @@ export default function PromptWeb({ setCompletion, setPrompt, prompt }: PromptWe
 
   return (
     <div className={`${theme ? 'theme-white' : null} flex-1 flex`}>
-        <form onSubmit={handleSubmit} className="flex flex-col justify-between pb-7">
+        <form onSubmit={handleSubmit} className="flex flex-col justify-between pb-7 z-10">
             <Button 
                 data-executing={isLoading}
                 className="flex flex-row gap-2 justify-center items-center w-full data-[executing]:cursor-not-allowed"

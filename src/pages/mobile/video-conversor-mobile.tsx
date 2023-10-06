@@ -11,9 +11,9 @@ import { CheckCircle, FileVideo, Upload } from "lucide-react"
 import { ChangeEvent, FormEvent, useContext, useMemo, useRef, useState } from "react"
 
 const ButtonStatesProps = {
-  converting: 'Convertendo...',
-  transcripting: 'Transcrevendo...',
-  completed: 'Sucesso'
+  converting: 'Converting...',
+  transcripting: 'Transcribing...',
+  completed: 'Success'
 }
 
 interface ButtonStateProps {
@@ -133,13 +133,12 @@ export default function VideoConversorMobile() {
             <>
               <div className="relative z-10"> 
                 <video src={previewURL} controls={false} className={`pointer-events-none max-h-60 ${button === "converting" || button === "transcripting" ? null : null}`} />
-                {/* {button === "converting" || button === "transcripting" ? <Loader2Icon className="w-8 h-8 text-skin-base absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-spin" /> : null} */}
               </div>
             </>
             : 
             <>
               <FileVideo className="w-6 h-6" onChange={() => {console.log('teste')}}/>
-              Selecione um video
+              Upload a video
             </>
           }
           {button === 'transcripting' || button === 'converting' ? 
@@ -166,7 +165,7 @@ export default function VideoConversorMobile() {
           <TextArea 
             inputRef={promptRef}
             id="transcription_prompt"
-            placeholder="Inclua palavras-chave mencionadas no video separadas por virgula (,)"
+            placeholder="Include keywords mentioned in the video, separated by commas (,)."
             disabled={button ? true : false}
           />
         </div>
@@ -182,14 +181,14 @@ export default function VideoConversorMobile() {
             </>
             : 
             <>
-              Carregar Video
+              Upload
               <Upload className="h-4 w-4"/>
             </>
           }
         </button>
         {button === 'completed' ? 
           <>
-            <p className="text-md text-skin-muted italic">Etapa concluida, agora vá para a proxima etapa e veja a transcrição do seu video.</p> 
+            <p className="text-md text-skin-muted italic"> Stage completed, now move on to the next stage and review the transcription of your video.</p> 
             <NewPageButton to="/transcription" />
           </>
         : 

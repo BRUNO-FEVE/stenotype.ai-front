@@ -5,13 +5,12 @@ import { getFfmpeg } from "@/lib/ffmpeg"
 import { fetchFile } from "@ffmpeg/util"
 import { FileVideo, CheckCircle, Upload } from "lucide-react"
 import { useRef, useState, useContext, ChangeEvent, useMemo, FormEvent } from "react"
-import BackgroundBlur from "../ui/background-blur"
 import TextArea from "../ui/text-area"
 
 const ButtonStatesProps = {
-  converting: 'Convertendo...',
-  transcripting: 'Transcrevendo...',
-  completed: 'Sucesso'
+  converting: 'Converting...',
+  transcripting: 'Transcribing...',
+  completed: 'Success'
 }
 
 interface ButtonStateProps {
@@ -136,13 +135,6 @@ export default function VideoConversorWeb() {
               Upload a video 
           </>
         }
-        {button === 'transcripting' || button === 'converting' ? 
-          <>
-            <BackgroundBlur color="red" className="top-10 -left-10 animate-pulse" />
-          </>
-              : 
-          null
-        }
       </label>
       <input 
         type="file" 
@@ -176,7 +168,7 @@ export default function VideoConversorWeb() {
             </>
                 : 
             <>
-              Carregar Video
+              Upload
               <Upload className="h-4 w-4"/>
             </>
           }
