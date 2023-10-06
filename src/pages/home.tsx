@@ -22,8 +22,8 @@ export default function Home() {
             className="text-white text-xl z-10 px-4 py-2 rounded-md hover:bg-skin-button-accent-hover bg-skin-button-accent">
               <button>Get Started for free</button>
           </Link>
-          <BackgroundBlur color="violet" className="top-24 left-24" />
-          <BackgroundBlur color="red" className="bottom-24 left-32" />
+          <BackgroundBlur color="violet" className="top-32 left-24" />
+          <BackgroundBlur color="red" className="bottom-32 left-32" />
         </div>
         <div className="h-full w-1/2 lg:flex hidden lg:flex-row">
           
