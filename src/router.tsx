@@ -10,16 +10,16 @@ import Documentation from './pages/documentation'
 export default function AppRouter() {
   const { width } = useWindowResize()
 
-  return (
-    width ? 
-      <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/documentation' element={<Documentation />} />
-          <Route path='conversor' element={width > 1000 ? <ControlStation /> : <VideoConversorMobile />} />
-          <Route path='transcription' element={<TranscriptionMobile />} />
-          <Route path='prompt' element={<Prompt />} />
-      </Routes>
-    :
-    null
-  )
+  return width ? (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/documentation" element={<Documentation />} />
+      <Route
+        path="conversor"
+        element={width > 1000 ? <ControlStation /> : <VideoConversorMobile />}
+      />
+      <Route path="transcription" element={<TranscriptionMobile />} />
+      <Route path="prompt" element={<Prompt />} />
+    </Routes>
+  ) : null
 }
