@@ -2,7 +2,7 @@ import { TextCursorInputIcon } from 'lucide-react'
 import { VideoContext } from '@/context/video-context'
 import { useContext } from 'react'
 import NewPageButton from '@/components/ui/button'
-import DefaultPageLayout from '@/components/default-page-layout'
+import DefaultPageLayout from '@/components/layout/default-page-layout'
 
 export default function TranscriptionMobile() {
   // const [ transcription, setTranscription ] = useState< string | null >(null)

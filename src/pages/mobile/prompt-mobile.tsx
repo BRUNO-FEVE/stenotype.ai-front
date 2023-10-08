@@ -21,7 +21,7 @@ import Slider from '@/components/ui/slider'
 import { Button } from '@/components/ui/button'
 import { useCompletion } from 'ai/react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import DefaultPageLayout from '@/components/default-page-layout'
+import DefaultPageLayout from '@/components/layout/default-page-layout'
 
 interface PromptProps {
   id: string
@@ -80,7 +80,7 @@ export default function Prompt() {
   }, [template])
 
   return (
-    <DefaultPageLayout className="h-full">
+    <DefaultPageLayout className="scrollbar-hide">
       <div className="flex flex-row justify-center items-center bg-skin-bg-secundary h-10 rounded-md py-2 px-4 gap-2 border border-skin-bg-muted">
         <TextSelect className="text-skin-base" />
         <p className="text-skin-base">

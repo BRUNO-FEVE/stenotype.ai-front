@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode, useContext } from 'react'
-import Navbar from './navbar'
+import Navbar from '../navbar'
 import { ThemeContext } from '@/context/theme-context'
 import { twMerge } from 'tailwind-merge'
 

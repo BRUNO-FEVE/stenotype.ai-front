@@ -12,7 +12,7 @@ import TextArea from '@/components/ui/text-area'
 import Icon from '@/components/ui/icon'
 import PromptWeb from '@/components/web/prompt-web'
 import { api } from '@/lib/axios'
-import DefaultPageLayout from '@/components/default-page-layout'
+import DefaultPageLayout from '@/components/layout/default-page-layout'
 
 interface PromptProps {
   id: string

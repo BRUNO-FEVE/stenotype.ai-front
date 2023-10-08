@@ -1,4 +1,4 @@
-import DefaultPageLayout from '@/components/default-page-layout'
+import DefaultPageLayout from '@/components/layout/default-page-layout'
 import BackgroundBlur from '@/components/ui/background-blur'
 import { Link } from 'react-router-dom'
 // import useWindowResize from "@/hooks/useWindowResize"

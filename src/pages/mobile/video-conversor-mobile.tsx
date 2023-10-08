@@ -1,4 +1,4 @@
-import DefaultPageLayout from '@/components/default-page-layout'
+import DefaultPageLayout from '@/components/layout/default-page-layout'
 import BackgroundBlur from '@/components/ui/background-blur'
 import NewPageButton from '@/components/ui/button'
 import TextArea from '@/components/ui/text-area'
