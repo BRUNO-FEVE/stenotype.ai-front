@@ -32,7 +32,7 @@ function Select({ placeholder, children, ...props }: NewSelectProps) {
           sideOffset={7}
           className={`${
             theme ? 'theme-white' : null
-          } bg-skin-bg-secundary box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
+          } z-20 bg-skin-bg-secundary box-border rounded-sm text-skin-base border border-skin-bg-muted w-full min-w-[var(--radix-select-trigger-width)] py-2 px-2`}
         >
           <SelectPrimitive.Viewport>{children}</SelectPrimitive.Viewport>
         </SelectPrimitive.Content>
