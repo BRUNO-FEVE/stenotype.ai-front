@@ -197,7 +197,7 @@ export default function VideoConversorMobile() {
         />
         <div className="flex flex-col gap-2">
           <label htmlFor="transcription_prompt" className="text-skin-base z-10">
-            Prompt de transcrição :
+            KeyWords :
           </label>
           <TextArea
             inputRef={promptRef}
