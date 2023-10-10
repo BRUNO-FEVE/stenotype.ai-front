@@ -37,4 +37,17 @@ export class ContentList {
       lastContent.next = newContent
     }
   }
+
+  listChilds(): ContentUnit[] {
+    const finalList: ContentUnit[] = []
+    if (this.head) {
+      let nextContent = this.head.next
+      while (nextContent) {
+        finalList.push(nextContent)
+        nextContent = nextContent.next
+      }
+      return finalList
+    }
+    return []
+  }
 }
