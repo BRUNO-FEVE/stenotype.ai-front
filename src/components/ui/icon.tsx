@@ -1,6 +1,6 @@
 import { ThemeContext } from '@/context/theme-context'
 import { LucideIcon } from 'lucide-react'
-import { useContext } from 'react'
+import { HTMLAttributes, useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface IconProps {
@@ -8,7 +8,7 @@ interface IconProps {
   classname?: string
 }
 
-export default function Icon({ Icon, classname, ...props }: IconProps) {
+function Icon({ Icon, classname, ...props }: IconProps) {
   const { theme } = useContext(ThemeContext)
   return (
     <Icon
@@ -22,3 +22,24 @@ export default function Icon({ Icon, classname, ...props }: IconProps) {
     />
   )
 }
+
+interface IconListCellProps extends HTMLAttributes<HTMLDivElement> {
+  Icon: LucideIcon
+}
+
+function IconListCell({ Icon, children, ...props }: IconListCellProps) {
+  return (
+    <div
+      {...props}
+      className={twMerge(
+        'flex flex-row items-center gap-2 text-sm',
+        props.className,
+      )}
+    >
+      <Icon className="w-8 h-8" />
+      {children}
+    </div>
+  )
+}
+
+export { Icon, IconListCell }
