@@ -232,7 +232,7 @@ export default function VideoConversorMobile() {
               Stage completed, now move on to the next stage and review the
               transcription of your video.
             </p>
-            <NewPageButton to="/transcription" />
+            <NewPageButton variant="fixed" to="/transcription" />
           </>
         ) : null}
       </form>

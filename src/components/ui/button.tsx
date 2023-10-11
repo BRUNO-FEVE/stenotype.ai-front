@@ -3,6 +3,8 @@ import React, { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
 
+type variantType = 'default' | 'fixed'
+
 interface VariantProps {
   style: string
   content: ReactNode
@@ -10,7 +12,7 @@ interface VariantProps {
 
 interface NewPageButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: string
+  variant: variantType
   to: string
 }
 
@@ -20,7 +22,7 @@ export default function PageButton({
   children,
   ...props
 }: NewPageButtonProps) {
-  const variants: { [key: string]: VariantProps } = {
+  const variants: Record<variantType, VariantProps> = {
     default: {
       style:
         'px-20 py-2 ml-auto text-white bg-skin-button-accent hover:bg-skin-button-accent-hover rounded-md',

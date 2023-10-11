@@ -31,7 +31,7 @@ export default function TranscriptionMobile() {
         and educational transcriptions. Keywords save time and effort, making
         the process efficient and productive.
       </p>
-      <NewPageButton to="/prompt" />
+      <NewPageButton variant="fixed" to="/prompt" />
     </DefaultPageLayout>
   )
 }
