@@ -50,4 +50,13 @@ export class ContentList {
     }
     return []
   }
+
+  lastChild(): ContentUnit | null {
+    if (!this.head?.next) return this.head
+    let lastChild = this.head.next
+    while (lastChild.next) {
+      lastChild = lastChild.next
+    }
+    return lastChild
+  }
 }
