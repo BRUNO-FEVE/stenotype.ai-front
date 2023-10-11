@@ -1,6 +1,6 @@
 import { ThemeContext } from '@/context/theme-context'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import Icon from '@/components/ui/icon'
+import { Icon } from '@/components/ui/icon'
 import { GithubIcon } from 'lucide-react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'

@@ -8,7 +8,7 @@ import { ThemeContext } from '@/context/theme-context'
 import { api } from '@/lib/axios'
 import { useCompletion } from 'ai/react'
 import { VideoContext } from '@/context/video-context'
-import Icon from '../ui/icon'
+import { Icon } from '../ui/icon'
 
 interface PromptProps {
   id: string
