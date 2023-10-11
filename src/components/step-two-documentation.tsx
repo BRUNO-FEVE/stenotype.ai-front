@@ -17,6 +17,9 @@ export default function StepTwoDocumentation() {
         <a href="#custom-prompts">
           <Text variant="link">Custom Propmts</Text>
         </a>
+        <a href="#temperature">
+          <Text variant="link">Temperature</Text>
+        </a>
       </TopicsBar>
       <div
         className={`${
@@ -56,7 +59,7 @@ export default function StepTwoDocumentation() {
               <IconListCell Icon={PenIcon}>Description</IconListCell>
             </div>
           </div>
-          <Text variant="paragraph">
+          <Text id="temperature" variant="paragraph">
             Leveraging these predefined prompts streamlines your interaction
             with the AI and allows you to seamlessly create content for a
             variety of applications, whether you're aiming to enhance your
