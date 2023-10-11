@@ -3,6 +3,7 @@ import Text from '../components/ui/text'
 import { ThemeContext } from '@/context/theme-context'
 import ContentBox from './layout/content-box'
 import FileTypeGrid from './file-type-grid'
+import TopicsBar from './ui/topics-bar'
 // import StepOneDocumentation from './step-one-documentation'
 
 // interface GetStartedProps {
@@ -13,17 +14,14 @@ export default function GetStarted() {
   const { theme } = useContext(ThemeContext)
   return (
     <div className="relative flex items-start">
-      <div className="w-1/5 fixed right-0 pl-2 text-sm hidden lg:flex lg:flex-col lg:gap-4">
-        <h2>On this page</h2>
-        <div className="flex flex-col gap-3">
-          <a href="#aplicantions">
-            <Text variant="link">Commum Aplicantions</Text>
-          </a>
-          <a href="#before-start">
-            <Text variant="link">Before you start</Text>
-          </a>
-        </div>
-      </div>
+      <TopicsBar>
+        <a href="#aplicantions">
+          <Text variant="link">Commum Aplicantions</Text>
+        </a>
+        <a href="#before-start">
+          <Text variant="link">Before you start</Text>
+        </a>
+      </TopicsBar>
       <div
         className={`${
           theme ? 'selection:bg-sky-300' : 'selection:bg-indigo-500'

@@ -5,6 +5,7 @@ import { ThemeContext } from '@/context/theme-context'
 import ConvertingImgDarkMode from '@/assets/step-1-dark-mode.png'
 import ConvertingImgWhiteMode from '@/assets/step-1-white-mode.png'
 import { TextCursorInputIcon } from 'lucide-react'
+import TopicsBar from './ui/topics-bar'
 
 // interface StepOneDocumentationProps {
 //   setNextStep?: (nextPage: ReactNode) => void
@@ -14,15 +15,12 @@ export default function StepOneDocumentation() {
   const { theme } = useContext(ThemeContext)
 
   return (
-    <div className="relative">
-      <div className="w-1/5 fixed right-0 pl-2 text-sm hidden lg:flex lg:flex-col lg:gap-4">
-        <h2>On this page</h2>
-        <div className="flex flex-col gap-3">
-          <a href="#key-words">
-            <Text variant="link">Key Words</Text>
-          </a>
-        </div>
-      </div>
+    <div className="relative flex items-start">
+      <TopicsBar>
+        <a href="#key-words">
+          <Text variant="link">Key Words</Text>
+        </a>
+      </TopicsBar>
       <div
         className={`${
           theme ? 'selection:bg-sky-300' : 'selection:bg-indigo-500'
