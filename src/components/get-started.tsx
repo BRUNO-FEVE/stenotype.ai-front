@@ -3,13 +3,17 @@ import Text from '../components/ui/text'
 import { ThemeContext } from '@/context/theme-context'
 import ContentBox from './layout/content-box'
 import FileTypeGrid from './file-type-grid'
-import Separator from '../components/ui/separator'
+// import StepOneDocumentation from './step-one-documentation'
+
+// interface GetStartedProps {
+//   setNextStep?: (nextPage: ReactNode) => void
+// }
 
 export default function GetStarted() {
   const { theme } = useContext(ThemeContext)
   return (
     <div className="relative flex items-start">
-      <div className="w-1/5 fixed right-0 pl-2 text-sm hidden md:flex md:flex-col md:gap-4">
+      <div className="w-1/5 fixed right-0 pl-2 text-sm hidden lg:flex lg:flex-col lg:gap-4">
         <h2>On this page</h2>
         <div className="flex flex-col gap-3">
           <a href="#aplicantions">
@@ -79,12 +83,6 @@ export default function GetStarted() {
             <FileTypeGrid />
           </div>
         </ContentBox>
-        <Separator orientation="horizontal" />
-        <div className="flex justify-end">
-          <button className="px-20 py-2 text-white bg-skin-button-accent hover:bg-skin-button-accent-hover rounded-md">
-            Let's Start
-          </button>
-        </div>
       </div>
     </div>
   )
