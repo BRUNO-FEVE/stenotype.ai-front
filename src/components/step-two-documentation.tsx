@@ -33,6 +33,8 @@ export default function StepTwoDocumentation() {
             understands your specific requirements and generates content
             accordingly.
           </Text>
+        </ContentBox>
+        <ContentBox>
           <Text id="custom-prompts" variant="subtitle_1">
             Default Prompts
           </Text>
@@ -60,7 +62,9 @@ export default function StepTwoDocumentation() {
             variety of applications, whether you're aiming to enhance your
             social media presence or craft professional resumes.
           </Text>
-          <Text variant="subtitle_1">Custom Propmts</Text>
+        </ContentBox>
+        <ContentBox>
+          <Text variant="subtitle_1">Custom Prompts</Text>
           <Text variant="paragraph">
             While these default prompts are convenient, we highly recommend that
             users create custom prompts tailored to their specific needs. You
@@ -69,6 +73,18 @@ export default function StepTwoDocumentation() {
             approach ensures that Stenotype delivers content precisely aligned
             with your objectives, making it a powerful tool for a wide range of
             applications.
+          </Text>
+        </ContentBox>
+        <ContentBox>
+          <Text variant="subtitle_1">Temperature</Text>
+          <Text variant="paragraph">
+            The temperature setting is a critical factor when working with AI
+            models like Stenotype. It plays a key role in influencing the
+            creativity and output of the AI. Temperature essentially acts as a
+            knob that adjusts the randomness of the AI's responses. A higher
+            temperature setting, such as 0.8, will result in more creative and
+            diverse responses, while a lower setting, like 0.2, will yield more
+            deterministic and focused answers.
           </Text>
         </ContentBox>
       </div>
