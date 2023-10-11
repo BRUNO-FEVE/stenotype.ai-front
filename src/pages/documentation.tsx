@@ -53,7 +53,7 @@ export default function Documentation() {
             {GET_STARTED_STEPS.map((pageContent, index) => {
               return (
                 <button
-                  className="pl-2 text-sm hover:text-white duration-100 ease-in"
+                  className="pl-2 text-sm hover:text-skin-base duration-100 ease-in"
                   key={index}
                   onClick={() => {
                     changePageContent(pageContent)
