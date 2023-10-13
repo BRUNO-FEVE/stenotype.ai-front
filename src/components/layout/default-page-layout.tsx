@@ -5,10 +5,12 @@ import { twMerge } from 'tailwind-merge'
 
 interface DefaultPageLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
+  isHome?: boolean
 }
 
 export default function DefaultPageLayout({
   children,
+  isHome = false,
   ...props
 }: DefaultPageLayoutProps) {
   const { theme } = useContext(ThemeContext)
@@ -16,13 +18,12 @@ export default function DefaultPageLayout({
     <div
       {...props}
       className={twMerge(
-        `${
-          theme ? 'theme-white' : null
-        } bg-skin-fill text-skin-base h-screen w-full py-24 px-7 flex flex-col gap-4 overflow-x-hidden`,
+        `${theme ? 'theme-white' : null} 
+        } bg-skin-fill text-skin-base h-screen w-screen py-24 px-7 flex flex-col gap-4 overflow-x-hidden`,
         props.className,
       )}
     >
-      <Navbar />
+      <Navbar isHome={isHome} />
       {children}
     </div>
   )

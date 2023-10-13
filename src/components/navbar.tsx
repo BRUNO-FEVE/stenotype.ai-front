@@ -5,16 +5,23 @@ import { GithubIcon } from 'lucide-react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Navbar() {
-  const { theme, handleThemeChange } = useContext(ThemeContext)
+interface NavbarProps {
+  isHome: boolean
+}
+
+export default function Navbar({ isHome }: NavbarProps) {
+  const { theme, handleThemeChange, handleHomeThemeChange } =
+    useContext(ThemeContext)
+
+  const setDefaultTheme = () => {
+    if (theme) handleThemeChange()
+  }
 
   return (
     <div className="z-10 fixed top-0 right-0 left-0 flex flex-row items-center py-5 px-6 gap-4 [&>*]:text-skin-base justify-between backdrop-blur-sm">
-      <div className="flex flex-row gap-3">
-        <Link to={'/'}>
-          <h1 className="font-bold text-2xl sm:text-xl">stenotype.ai</h1>
-        </Link>
-      </div>
+      <Link to={'/'} onClick={setDefaultTheme}>
+        <h1 className="font-bold text-2xl sm:text-xl">stenotype.ai</h1>
+      </Link>
       <div className="sm:flex hidden flex-row gap-4 px-6 py-3 rounded-3xl">
         <Link to={'/documentation'}>
           <button className="text-sm text-skin-muted hover:underline underline-offset-4  hover:text-skin-base duration-100 ease-in">
@@ -44,7 +51,10 @@ export default function Navbar() {
           )}
         </button>
       </div>
-      <button className="md:hidden block" onClick={handleThemeChange}>
+      <button
+        className="md:hidden block"
+        onClick={isHome ? handleHomeThemeChange : handleThemeChange}
+      >
         {theme ? (
           <MoonIcon className="h-6 w-6" />
         ) : (

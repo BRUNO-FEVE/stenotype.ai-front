@@ -1,33 +1,41 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useState } from 'react'
 
 interface DefaultThemeProps {
-    theme: boolean | null
-    handleThemeChange: () => void
+  theme: boolean
+  handleThemeChange: () => void
+  handleHomeThemeChange: () => void
 }
 
 const DefaultTheme: DefaultThemeProps = {
-    theme: false,
-    handleThemeChange: () => {}
+  theme: false,
+  handleThemeChange: () => {},
+  handleHomeThemeChange: () => {},
 }
 
 export const ThemeContext = createContext(DefaultTheme)
 
-export default function ThemeProvider( {children}: PropsWithChildren ) {
-    const [ theme, setTheme ] = useState<boolean | null>(false)
+export default function ThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setTheme] = useState<boolean>(false)
 
-    const handleThemeChange = () => {
-        setTheme(prev => !prev)
-    }
+  const handleThemeChange = () => {
+    setTheme((prev) => !prev)
+  }
+
+  const handleHomeThemeChange = () => {
+    setTimeout(() => {
+      setTheme((prev) => !prev)
+    }, 3000) // 3000 sec
+  }
 
   return (
     <ThemeContext.Provider
-        value={{
-            theme,
-            handleThemeChange
-        }}
+      value={{
+        theme,
+        handleThemeChange,
+        handleHomeThemeChange,
+      }}
     >
-        { children }
+      {children}
     </ThemeContext.Provider>
   )
 }
-

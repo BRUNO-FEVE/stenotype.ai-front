@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useState } from 'react'
 
 interface WindowSizeProps {
-    width: number | undefined;
-    height: number | undefined;
+  width: number
+  height: number
 }
 
 export default function useWindowResize() {
-    const [ windowSize, setWindowSize ] = useState<WindowSizeProps>({ width: undefined, height: undefined })
+  const [windowSize, setWindowSize] = useState<WindowSizeProps>({
+    width: 0,
+    height: 0,
+  })
 
-    useEffect(() => {
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
 
-        function handleResize () {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            })
-        }
+    window.addEventListener('resize', handleResize)
 
-        window.addEventListener('resize', handleResize)
+    handleResize()
 
-        handleResize();
-
-        return () => window.removeEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  }, [])
 
-    return windowSize
+  return windowSize
 }

@@ -1,11 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/home'
+// import Home from './pages/home'
 import Prompt from './pages/mobile/prompt-mobile'
 import VideoConversorMobile from './pages/mobile/video-conversor-mobile'
 import useWindowResize from './hooks/useWindowResize'
 import TranscriptionMobile from './pages/mobile/transcription-mobile'
 import ControlStation from './pages/control-station'
 import Documentation from './pages/documentation'
+import Home from './pages/home'
 
 export default function AppRouter() {
   const { width } = useWindowResize()
