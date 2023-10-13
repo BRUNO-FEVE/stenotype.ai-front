@@ -19,7 +19,7 @@ export default function DefaultPageLayout({
       {...props}
       className={twMerge(
         `${theme ? 'theme-white' : null} 
-        } bg-skin-fill text-skin-base h-screen w-screen py-24 px-7 flex flex-col gap-4 overflow-x-hidden`,
+        } bg-skin-fill font-skin text-skin-base h-screen w-screen py-24 px-7 flex flex-col gap-4 overflow-x-hidden`,
         props.className,
       )}
     >
