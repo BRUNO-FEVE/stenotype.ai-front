@@ -151,10 +151,8 @@ export default function VideoConversorMobile() {
             <>
               <div className="relative z-10">
                 <video
-                  playsInline
-                  src={previewURL}
                   controls={false}
-                  width={'100%'}
+                  poster={previewURL}
                   className={`pointer-events-none max-h-60 ${
                     button === 'converting' || button === 'transcripting'
                       ? null
