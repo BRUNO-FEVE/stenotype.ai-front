@@ -139,7 +139,9 @@ export default function VideoConversorMobile() {
       >
         <label
           htmlFor="video"
-          className={`aspect-video cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${
+          className={`${
+            videofile ? null : 'aspect-video'
+          } cursor-pointer text-skin-base flex flex-col items-center justify-center gap-3 rounded-md ${
             videofile
               ? null
               : `bg-skin-bg-secundary border border-dashed border-skin-bg-muted ${
@@ -151,13 +153,10 @@ export default function VideoConversorMobile() {
             <>
               <div className="relative z-10">
                 <video
+                  playsInline
                   controls={false}
                   poster={previewURL}
-                  className={`pointer-events-none max-h-60 ${
-                    button === 'converting' || button === 'transcripting'
-                      ? null
-                      : null
-                  }`}
+                  className={`pointer-events-none max-h-64`}
                 />
               </div>
             </>
