@@ -1,78 +1,45 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line no-undef
 module.exports = {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
-      colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+      textColor: {
+        skin: {
+          base: 'var(--color-text-base)',
+          muted: 'var(--color-text-muted)',
+          inverted: 'var(--color-background)',
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+      backgroundColor: {
+        skin: {
+          fill: 'var(--color-background)',
+          'bg-secundary': 'var(--color-secondary)',
+          'bg-base-foreground': 'var(--color-text-base)',
+          'bg-fill-default': 'var(--color-fill)',
+          'button-accent': 'var(--color-button-accent)',
+          'button-accent-hover': 'var(--color-button-accent-hover)',
+          'button-muted': 'var(--color-button-muted)',
         },
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      gradientColorStops: {
+        skin: {
+          hue: 'var(--color-fill)',
+        },
+      },
+      borderColor: {
+        skin: {
+          'bg-muted': 'var(--color-text-muted)',
+        },
       },
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')],
 }

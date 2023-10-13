@@ -1,58 +1,67 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import { ArrowRightIcon } from 'lucide-react'
+import React, { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import { twMerge } from 'tailwind-merge'
 
-import { cn } from "@/lib/utils"
+type variantType = 'default' | 'fixed'
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+interface VariantProps {
+  style: string
+  content: ReactNode
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
+interface NewPageButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: variantType
+  to: string
+}
 
-// eslint-disable-next-line react-refresh/only-export-components
-export { Button, buttonVariants }
+export default function PageButton({
+  variant,
+  to,
+  children,
+  ...props
+}: NewPageButtonProps) {
+  const variants: Record<variantType, VariantProps> = {
+    default: {
+      style:
+        'px-20 py-2 ml-auto text-white bg-skin-button-accent hover:bg-skin-button-accent-hover rounded-md',
+      content: children,
+    },
+    fixed: {
+      style:
+        'bg-skin-bg-base-foreground h-14 w-14 rounded-full fixed right-5 bottom-5 flex justify-center items-center',
+      content: <ArrowRightIcon className="text-skin-inverted w-8 h-8" />,
+    },
+  }
+
+  const style = variants[variant].style
+  const content = variants[variant].content
+  return (
+    <Link to={to}>
+      <button {...props} className={twMerge(style, props.className)}>
+        {content}
+      </button>
+    </Link>
+  )
+}
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+}
+
+function Button({ children, ...props }: ButtonProps) {
+  return (
+    <button
+      {...props}
+      className={twMerge(
+        'px-4 py-2 bg-skin-button-accent hover:bg-skin-button-accent-hover text-white',
+        props.className,
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+
+export { Button }
