@@ -151,6 +151,7 @@ export default function VideoConversorMobile() {
             <>
               <div className="relative z-10">
                 <video
+                  playsInline
                   src={previewURL}
                   controls={false}
                   className={`pointer-events-none max-h-60 ${
