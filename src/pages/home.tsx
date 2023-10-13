@@ -22,10 +22,6 @@ export default function Home() {
     spline.current = splineApp
   }
 
-  useEffect(() => {
-    spline.current?.setVariable('Theme', theme)
-  }, [theme])
-
   const handleResponsivitySpline = () => {
     spline.current?.setVariable('Window Size', width)
     if (width < 480) {
@@ -34,16 +30,26 @@ export default function Home() {
   }
 
   useEffect(() => {
+    spline.current?.setVariable('Theme', theme)
+  }, [theme])
+
+  useEffect(() => {
     handleResponsivitySpline()
   }, [width])
 
   useEffect(() => {
     handleResponsivitySpline()
     spline.current?.setVariable('Theme', theme)
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 5000) // 5 sec
+
+    const hasBeenPreLoaded = sessionStorage.getItem('preloaded')
+
+    if (!hasBeenPreLoaded) {
+      setLoading(true)
+      setTimeout(() => {
+        sessionStorage.setItem('preloaded', 'true')
+        setLoading(false)
+      }, 5000) // 5 sec
+    }
   }, [])
 
   return (
@@ -57,15 +63,15 @@ export default function Home() {
         />
         <div className="flex-1 flex flex-row items-center w-full max-w-screen-2xl relative">
           <div className="lg:w-1/2 p-8 w-fit flex flex-col gap-10 justify-start px-6 lg:pl-20 h-fit items-start md:items-start text-skin-muted">
-            <h1 className="font text-5xl text-left md:text-6xl md:text-left lg:text-7xl md:leading-tight z-10 leading-10">
+            <h1 className="font text-3xl font-skin leading-5 text-left md:text-6xl md:text-left lg:text-7xl md:leading-tight z-10">
               IMPROVE YOUR
               <br />
-              <span className="text-skin-base md:text-skin-base leading-snug">
+              <span className="text-skin-base md:text-skin-base font-semibold leading-snug">
                 PRODUCTIVITY
               </span>
               <br /> WITH AI
             </h1>
-            <p className="z-10 w-4/5 md:px-0 md:pr-28 text-left md:w-3/4 lg:w-full">
+            <p className="z-10 text-sm md:text-base w-3/5 md:px-0 md:pr-28 text-left md:w-3/4 lg:w-full">
               Harness the full potential of Stenotype.ai to craft engaging
               social media content or even streamline a complex lecture.
             </p>

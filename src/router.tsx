@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-// import Home from './pages/home'
 import Prompt from './pages/mobile/prompt-mobile'
 import VideoConversorMobile from './pages/mobile/video-conversor-mobile'
 import useWindowResize from './hooks/useWindowResize'
