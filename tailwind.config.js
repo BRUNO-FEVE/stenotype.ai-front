@@ -38,6 +38,9 @@ module.exports = {
           'bg-muted': 'var(--color-text-muted)',
         },
       },
+      fontFamily: {
+        skin: ['Gabarito'],
+      },
     },
   },
   // eslint-disable-next-line no-undef

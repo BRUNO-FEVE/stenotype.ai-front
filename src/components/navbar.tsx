@@ -20,7 +20,9 @@ export default function Navbar({ isHome }: NavbarProps) {
   return (
     <div className="z-10 fixed top-0 right-0 left-0 flex flex-row items-center py-5 px-6 gap-4 [&>*]:text-skin-base justify-between backdrop-blur-sm">
       <Link to={'/'} onClick={setDefaultTheme}>
-        <h1 className="font-bold text-2xl sm:text-xl">stenotype.ai</h1>
+        <h1 className="font-bold font-sans text-2xl sm:text-xl">
+          stenotype.ai
+        </h1>
       </Link>
       <div className="sm:flex hidden flex-row gap-4 px-6 py-3 rounded-3xl">
         <Link to={'/documentation'}>
