@@ -154,6 +154,7 @@ export default function VideoConversorMobile() {
                   playsInline
                   src={previewURL}
                   controls={false}
+                  width={'100%'}
                   className={`pointer-events-none max-h-60 ${
                     button === 'converting' || button === 'transcripting'
                       ? null
