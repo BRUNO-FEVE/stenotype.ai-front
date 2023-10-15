@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# [Stenotype AI](https://stenotype-ai.com)
 
-Currently, two official plugins are available:
+A  website that uses automatic video transcription via the GPT-3 chat API to create social media content and summarize educational videos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+**Technologies:** React, Vite, TypeScript, TailwindCSS, Radix-UI, Spline
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Install stenotype-ai using yarn
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+  git clone https://github.com/BRUNO-FEVE/stenotype.ai-front.git
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+  cd stenotype-ai
+  
+  yarn install
+  yarn dev
 ```
+These commands will clone the repository and set up the necessary dependencies for the project.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Features
+
+- **Video Transcription**: Transcribe videos by uploading a video (.mp4) and providing keywords to enhance accuracy. OpenAI's Whisper will perform the transcription on the audio of the video.
+
+- **Asking the AI**:  Utilizing the transcription, users can inquire, generate content, or summarize the video, and the possibilities are limitless with the right prompt. Here are some examples, but it's even more effective when users craft their custom prompts.
+
+    **Examples**
+    - Social Media Title
+    - Social Media Description 
+    - Topic Summary
+
+## Comming Soon: 
+
+- Login
+- Save Your Own Prompts
+
+## Contact
+
+- [@bruno fevereiro](https://www.linkedin.com/in/bruno-fevereiro/)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
