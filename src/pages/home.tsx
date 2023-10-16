@@ -35,6 +35,7 @@ export default function Home() {
 
   useEffect(() => {
     handleResponsivitySpline()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width])
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function Home() {
         setLoading(false)
       }, 5000) // 5 sec
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -75,12 +77,19 @@ export default function Home() {
               Harness the full potential of Stenotype.ai to craft engaging
               social media content or even streamline a complex lecture.
             </p>
-            <Link
-              to={'/conversor'}
-              className="text-white text-xl z-10 px-4 py-2 rounded-md hover:bg-skin-button-accent-hover bg-skin-button-accent"
-            >
-              <button>Get Started for free</button>
-            </Link>
+            <div className="flex flex-row gap-4 items-center">
+              <Link
+                to={'/conversor'}
+                className="text-white text-xl z-10 px-4 py-2 rounded-md hover:bg-skin-button-accent-hover bg-skin-button-accent"
+              >
+                <button>Get Started for free</button>
+              </Link>
+              <Link to={'/documentation'} className="md:hidden">
+                <button className="hover:underline underline-offset-2">
+                  Docs
+                </button>
+              </Link>
+            </div>
           </div>
           <div className="h-full w-1/2 lg:flex hidden lg:flex-row"></div>
         </div>
